@@ -7,6 +7,10 @@ $(document).ready(function(){
         xhr.abort();
       }
 
+      (_.debounce(doAjax.bind(this,url),100))();
+  });
+
+  function doAjax(url){
       xhr = $.ajax({
         url: url,
         type: 'GET', 
@@ -18,8 +22,7 @@ $(document).ready(function(){
            $('#user_data').hide();
         }
       });
-
-  });
+  }
 
   function renderResult(res){
      $('#result').text('User Found!!');
