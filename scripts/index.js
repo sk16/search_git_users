@@ -1,16 +1,16 @@
 $(document).ready(function(){
-  var xhr;
+  var xhr,url,doAjaxDebounce = _.debounce(doAjax,200);
+
   $("#users").keyup(function(){
       var user = $('#users').val();
-      var url = 'https://api.github.com/users/'+user;
+      url = 'https://api.github.com/users/'+user;
       if(xhr){
         xhr.abort();
       }
-
-      (_.debounce(doAjax.bind(this,url),100))();
+      doAjaxDebounce();
   });
 
-  function doAjax(url){
+  function doAjax(){
       xhr = $.ajax({
         url: url,
         type: 'GET', 
